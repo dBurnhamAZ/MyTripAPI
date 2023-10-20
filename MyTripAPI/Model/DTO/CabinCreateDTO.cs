@@ -2,7 +2,7 @@
 
 namespace MyTripAPI.Model.DTO
 {
-    public class SuiteCreateDTO
+    public class CabinCreateDTO
     {
         [Required]
         [MaxLength(30)]

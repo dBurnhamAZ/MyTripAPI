@@ -9,11 +9,11 @@ namespace MyTripAPI
         public MappingConfig()
         {
 
-            CreateMap<Suite, SuiteDTO>();
-            CreateMap<SuiteDTO, Suite>();
+            CreateMap<Cabin, CabinDTO>();
+            CreateMap<CabinDTO, Cabin>();
 
-            CreateMap<Suite, SuiteCreateDTO>().ReverseMap();
-            CreateMap<Suite, SuiteUpdateDTO>().ReverseMap();
+            CreateMap<Cabin, CabinCreateDTO>().ReverseMap();
+            CreateMap<Cabin, CabinUpdateDTO>().ReverseMap();
         }
 
     }

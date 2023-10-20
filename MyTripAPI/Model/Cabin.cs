@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MyTripAPI.Model
 {
-    public class Suite
+    public class Cabin
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

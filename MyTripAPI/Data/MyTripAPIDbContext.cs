@@ -10,17 +10,17 @@ namespace MyTripAPI.Data
         {
         }
 
-        public DbSet<Suite> Suites { get; set; }
+        public DbSet<Cabin> Cabins { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Suite>().HasData(
-                new Suite()
+            modelBuilder.Entity<Cabin>().HasData(
+                new Cabin()
                 {
                     Id = 1,
-                    Name = "Royal Suite",
+                    Name = "Royal Cabin",
                     Details = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                    ImageUrl = "C:\\Users\\nerme\\full-stack-learning-projects\\DotNetMastery_RESTAPIS\\ASP.NET MVC\\MagicSuite\\MagicSuite_SuiteAPI\\Images\\01.jpg",
+                    ImageUrl = "C:\\Users\\nerme\\full-stack-learning-projects\\DotNetMastery_RESTAPIS\\ASP.NET MVC\\GetAwayCabin\\GetAwayCabin_CabinAPI\\Images\\01.jpg",
                     Rate = 220,
                     Occupancy = 5,
                     Sqft = 550,
@@ -28,12 +28,12 @@ namespace MyTripAPI.Data
                     CreatedDate = DateTime.Now
 
                 },
-                 new Suite()
+                 new Cabin()
                  {
                      Id = 2,
-                     Name = "Ghoyal Suite",
+                     Name = "Ghoyal Cabin",
                      Details = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                     ImageUrl = "C:\\Users\\nerme\\full-stack-learning-projects\\DotNetMastery_RESTAPIS\\ASP.NET MVC\\MagicSuite\\MagicSuite_SuiteAPI\\Images\\01.jpg",
+                     ImageUrl = "C:\\Users\\nerme\\full-stack-learning-projects\\DotNetMastery_RESTAPIS\\ASP.NET MVC\\GetAwayCabin\\GetAwayCabin_CabinAPI\\Images\\01.jpg",
                      Rate = 120,
                      Occupancy = 4,
                      Sqft = 230,
@@ -41,12 +41,12 @@ namespace MyTripAPI.Data
                      CreatedDate = DateTime.Now
 
                  },
-                  new Suite()
+                  new Cabin()
                   {
                       Id = 3,
-                      Name = "Shriya Ghoshal Suite",
+                      Name = "Shriya Ghoshal Cabin",
                       Details = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                      ImageUrl = "C:\\Users\\nerme\\full-stack-learning-projects\\DotNetMastery_RESTAPIS\\ASP.NET MVC\\MagicSuite\\MagicSuite_SuiteAPI\\Images\\01.jpg",
+                      ImageUrl = "C:\\Users\\nerme\\full-stack-learning-projects\\DotNetMastery_RESTAPIS\\ASP.NET MVC\\GetAwayCabin\\GetAwayCabin_CabinAPI\\Images\\01.jpg",
                       Rate = 320,
                       Occupancy = 3,
                       Sqft = 140,
@@ -54,12 +54,12 @@ namespace MyTripAPI.Data
                       CreatedDate = DateTime.Now
 
                   },
-                   new Suite()
+                   new Cabin()
                    {
                        Id = 4,
-                       Name = "Social Suite",
+                       Name = "Social Cabin",
                        Details = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                       ImageUrl = "C:\\Users\\nerme\\full-stack-learning-projects\\DotNetMastery_RESTAPIS\\ASP.NET MVC\\MagicSuite\\MagicSuite_SuiteAPI\\Images\\01.jpg",
+                       ImageUrl = "C:\\Users\\nerme\\full-stack-learning-projects\\DotNetMastery_RESTAPIS\\ASP.NET MVC\\GetAwayCabin\\GetAwayCabin_CabinAPI\\Images\\01.jpg",
                        Rate = 310,
                        Occupancy = 2,
                        Sqft = 400,
@@ -67,24 +67,24 @@ namespace MyTripAPI.Data
                        CreatedDate = DateTime.Now
 
                    },
-                    new Suite()
+                    new Cabin()
                     {
                         Id = 5,
-                        Name = "Ghost Suite",
+                        Name = "Ghost Cabin",
                         Details = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                        ImageUrl = "C:\\Users\\nerme\\full-stack-learning-projects\\DotNetMastery_RESTAPIS\\ASP.NET MVC\\MagicSuite\\MagicSuite_SuiteAPI\\Images\\01.jpg",
+                        ImageUrl = "C:\\Users\\nerme\\full-stack-learning-projects\\DotNetMastery_RESTAPIS\\ASP.NET MVC\\GetAwayCabin\\GetAwayCabin_CabinAPI\\Images\\01.jpg",
                         Rate = 780,
                         Occupancy = 1,
                         Sqft = 480,
                         Amenity = "",
                         CreatedDate = DateTime.Now
                     },
-                     new Suite()
+                     new Cabin()
                      {
                          Id = 6,
-                         Name = "Koyal Ka Ghosla Suite",
+                         Name = "Koyal Ka Ghosla Cabin",
                          Details = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                         ImageUrl = "C:\\Users\\nerme\\full-stack-learning-projects\\DotNetMastery_RESTAPIS\\ASP.NET MVC\\MagicSuite\\MagicSuite_SuiteAPI\\Images\\01.jpg",
+                         ImageUrl = "C:\\Users\\nerme\\full-stack-learning-projects\\DotNetMastery_RESTAPIS\\ASP.NET MVC\\GetAwayCabin\\GetAwayCabin_CabinAPI\\Images\\01.jpg",
                          Rate = 447,
                          Occupancy = 6,
                          Sqft = 700,

@@ -2,7 +2,7 @@
 
 namespace MyTripAPI.Model.DTO
 {
-    public class SuiteUpdateDTO
+    public class CabinUpdateDTO
     {
         [Required]
         public int Id { get; set; }

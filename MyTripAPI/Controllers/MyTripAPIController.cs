@@ -30,27 +30,27 @@ namespace MyTripAPI.Controllers
         //return all records
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<SuiteDTO>>> GetSuites()
+        public async Task<ActionResult<IEnumerable<CabinDTO>>> GetCabins()
         {
-            IEnumerable<Suite> suiteList = await _db.Suites.ToListAsync();
-            _logger.Log("Getting all Suite", "");
-            return Ok(_mapper.Map<List<SuiteDTO>>(suiteList));
+            IEnumerable<Cabin> cabinList = await _db.Cabins.ToListAsync();
+            _logger.Log("Getting all Cabin", "");
+            return Ok(_mapper.Map<List<CabinDTO>>(cabinList));
         } 
 
         //return one record
-        [HttpGet("id:int", Name = "GetSuite")]
+        [HttpGet("id:int", Name = "GetCabin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<SuiteDTO>> GetSuite(int id)
+        public async Task<ActionResult<CabinDTO>> GetCabin(int id)
         {
             if (id == 0)
             {
-                _logger.Log("Get Suite Error with Id " + id, "error");
+                _logger.Log("Get Cabin Error with Id " + id, "error");
                 return BadRequest();
             }
 
-            var suite = await _db.Suites.FirstOrDefaultAsync(u => u.Id == id);
+            var suite = await _db.Cabins.FirstOrDefaultAsync(u => u.Id == id);
 
             if (suite == null)
             {
@@ -58,7 +58,7 @@ namespace MyTripAPI.Controllers
             }
             else
             {
-                return Ok(_mapper.Map<SuiteDTO>(suite));
+                return Ok(_mapper.Map<CabinDTO>(suite));
             }
         }
 
@@ -67,11 +67,11 @@ namespace MyTripAPI.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<SuiteDTO>> CreateSuite([FromBody] SuiteCreateDTO createDto)
+        public async Task<ActionResult<CabinDTO>> CreateCabin([FromBody] CabinCreateDTO createDto)
         {
-            if (await _db.Suites.FirstOrDefaultAsync(u => u.Name.ToLower() == createDto.Name.ToLower()) != null)
+            if (await _db.Cabins.FirstOrDefaultAsync(u => u.Name.ToLower() == createDto.Name.ToLower()) != null)
             {
-                ModelState.AddModelError("CustomError", "Suite already Exists");
+                ModelState.AddModelError("CustomError", "Cabin already Exists");
                 return BadRequest(ModelState);
             }
 
@@ -80,11 +80,11 @@ namespace MyTripAPI.Controllers
                 return BadRequest();
             }
 
-            Suite model = _mapper.Map<Suite>(createDto);
+            Cabin model = _mapper.Map<Cabin>(createDto);
 
             // * If we didn't use Mappings, we would have to map all columns manually like below
 
-            //Suite model = new()
+            //Cabin model = new()
             //{
             //    Amenity = createDto.Amenity,
             //    Details = createDto.Details,
@@ -95,49 +95,50 @@ namespace MyTripAPI.Controllers
             //    Sqft = createDto.Sqft
             //};
 
-            await _db.Suites.AddAsync(model);
+            await _db.Cabins.AddAsync(model);
             await _db.SaveChangesAsync();
 
             //Invoke create at Route
-            return CreatedAtRoute("GetSuite", new { id = model.Id }, model);
+            return CreatedAtRoute("GetCabin", new { id = model.Id }, model);
         }
 
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpDelete("{id:int}", Name = "DeleteSuite")]
+        [HttpDelete("{id:int}", Name = "DeleteCabin")]
+
         //you can determine the return type with IActionResult
-        public async Task<IActionResult> DeleteSuite(int id)
+        public async Task<IActionResult> DeleteCabin(int id)
         {
             if (id == 0)
             {
                 return BadRequest();
             }
 
-            var suite = await _db.Suites.FirstOrDefaultAsync(u => u.Id == id);
+            var suite = await _db.Cabins.FirstOrDefaultAsync(u => u.Id == id);
 
             if (suite == null)
             {
                 return NotFound();
             }
-            _db.Suites.Remove(suite);
+            _db.Cabins.Remove(suite);
             await _db.SaveChangesAsync();
             return NoContent();
         }
 
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpPut("{id:int}", Name = "UpdateSuite")]
-        public async Task<IActionResult> UpdateSuite(int id, [FromBody] SuiteUpdateDTO updateDto)
+        [HttpPut("{id:int}", Name = "UpdateCabin")]
+        public async Task<IActionResult> UpdateCabin(int id, [FromBody] CabinUpdateDTO updateDto)
         {
             if (updateDto == null || id != updateDto.Id)
             {
                 return BadRequest();
             }
 
-            Suite model = _mapper.Map<Suite>(updateDto);
+            Cabin model = _mapper.Map<Cabin>(updateDto);
 
-            _db.Suites.Update(model);
+            _db.Cabins.Update(model);
             await _db.SaveChangesAsync();
 
             return NoContent();
@@ -146,26 +147,28 @@ namespace MyTripAPI.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPatch("{id:int}", Name = "UpdatePartialVilla")]
-        public async Task<IActionResult> UpdatePartialVilla(int id, JsonPatchDocument<SuiteUpdateDTO> patchDto)
+        public async Task<IActionResult> UpdatePartialVilla(int id, JsonPatchDocument<CabinUpdateDTO> patchDto)
         {
             if (patchDto == null || id == 0)
             {
                 return BadRequest();
             }
 
-            var suite = await _db.Suites.AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
+            //*** AsNoTracking() will not allow more than one instatnce at a time. Saving Changes will
+            //*** throw errors without this Tracking set. 
+            var suite = await _db.Cabins.AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
 
             if (suite == null)
             {
                 return BadRequest();
             }
 
-            SuiteUpdateDTO villaUpdateDto = _mapper.Map<SuiteUpdateDTO>(suite);
+            CabinUpdateDTO villaUpdateDto = _mapper.Map<CabinUpdateDTO>(suite);
             patchDto.ApplyTo(villaUpdateDto, ModelState);
 
-            Suite model = _mapper.Map<Suite>(villaUpdateDto);
+            Cabin model = _mapper.Map<Cabin>(villaUpdateDto);
 
-            _db.Suites.Update(model);
+            //_db.Cabins.Update(model);
             await _db.SaveChangesAsync();
 
             if (!ModelState.IsValid)
